@@ -2,6 +2,9 @@ import QtQuick 2.0
 import QtQuick.XmlListModel 2.0
 import Sailfish.Silica 1.0
 
+//currently the search returns pages of 10 results per page... we only display the first 10 results...
+//we need to write code to handle multiple pages of results
+
 Page {
     property string queryString
     XmlListModel {
@@ -22,9 +25,24 @@ Page {
         }
     }
     id: page
-    SilicaFlickable {
-        anchors.fill: parent
 
+    SilicaListView {
+        id: listView
+        width: page.width
+        height: page.height
+        anchors.top: parent.top
+        model: results
+        header: PageHeader {
+            title: "Search Results"
+        }
+        ViewPlaceholder {
+            enabled: results.progress < 1
+            text: qsTr("Searching for results...")
+        }
+        ViewPlaceholder {
+            enabled: results.count < 1 && results.progress == 1
+            text: qsTr("No results found...")
+        }
         // PullDownMenu and PushUpMenu must be declared in SilicaFlickable, SilicaListView or SilicaGridView
         PullDownMenu {
             MenuItem {
@@ -35,24 +53,15 @@ Page {
                 }
             }
         }
-
-
-        SilicaListView {
-            id: listView
-            model: results
-            anchors.fill: parent
-            header: PageHeader {
-                title: "Search Results"
-            }
-            delegate: BackgroundItem {
-                id: delegate
-                Label {
-                    x: Theme.paddingLarge
-                    text: name + ' (' + type + ')'
-                    anchors.verticalCenter: parent.verticalCenter
-                    anchors.leftMargin: 10
-                    color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
-                }
+        VerticalScrollDecorator {
+        }
+        delegate: Item {
+            id: myListItem
+            width: ListView.view.width
+            height: contentItem.height
+            BackgroundItem {
+                id: contentItem
+                width: parent.width
                 property string infoUrl: url + "?format=xml"
                 onClicked: pageStack.push(Qt.resolvedUrl("TuneInfo.qml"), {
                                               infoUrl: infoUrl,
@@ -60,7 +69,11 @@ Page {
                                               type: type
                                           })
             }
-            VerticalScrollDecorator {
+            Label {
+                x: Theme.paddingLarge
+                text: name + ' (' + type + ')'
+                anchors.verticalCenter: parent.verticalCenter
+                color: contentItem.highlighted ? Theme.highlightColor : Theme.primaryColor
             }
         }
     }

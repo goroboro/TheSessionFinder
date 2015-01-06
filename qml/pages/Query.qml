@@ -17,30 +17,51 @@ Page {
             }
         }
         // Tell SilicaFlickable the height of its content.
-        contentHeight: column.height
+        contentHeight: item.height
 
         Item {
-            id: column
+            id: item
             anchors.fill: parent
+            height: page.height
 
             TextField {
                 id: searchField
-                placeholderText: "Search Tune"
-                anchors.centerIn: page
-                width: Screen.width - 20
+                placeholderText: "Search Tune (e.g. Butterfly)"
+                anchors.verticalCenter: parent.verticalCenter
+                width: parent.width - 20
                 focus: true
+                Keys.onEnterPressed: {
+                    pageStack.push(Qt.resolvedUrl("Results.qml"), {
+                                       queryString: searchField.text
+                                   })
+                }
+                Keys.onReturnPressed: {
+                    pageStack.push(Qt.resolvedUrl("Results.qml"), {
+                                       queryString: searchField.text
+                                   })
+                }
             }
 
             Button {
                 id: searchBtn
                 anchors.top: searchField.bottom
-                anchors.right: searchField.right
+                anchors.horizontalCenter: parent.horizontalCenter
                 text: "Search"
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("Results.qml"), {
                                        queryString: searchField.text
                                    })
                 }
+            }
+
+
+
+            TextArea {
+                id: help
+                anchors.top: searchBtn.bottom
+                width: parent.width
+                text: "Search for a traditional tune on thesession.org. For example, try searching for 'Off to California' or 'Dusty Windowsills'."
+                font.pixelSize: Theme.fontSizeSmall
             }
         }
     }

@@ -40,8 +40,6 @@ function getTuneSVG(tune,type,key,abc) {
             console.log(resp);
         }
 }
-    //var renabc=enc_x+'%0D%0A'+enc_tune+'%0D%0A'+enc_type+'%0D%0A'+enc_time+'%0D%0A'+enc_key+'%0D%0A'+enc_abc;
-    //resp=ABC.ABCJS.renderAbc('sheetmusic', renabc);
     return resp
 }
 

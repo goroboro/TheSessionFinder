@@ -23,5 +23,7 @@ OTHER_FILES += qml/TheSessionFinder.qml \
     qml/pages/ShowTune.qml \
     qml/pages/CollectionPage.qml \
     qml/pages/db.js \
-    qml/pages/mandonet.js
+    qml/pages/abc2svg.py
+
+HEADERS +=
 

@@ -61,11 +61,11 @@ function getCollection() {
         var rs = tx.executeSql('SELECT * FROM collections ORDER BY collections.uid DESC;');
         for (var i = 0; i < rs.rows.length; i++) {
             collectionPage.addCollection(rs.rows.item(i).uid,rs.rows.item(i).url,rs.rows.item(i).tune,rs.rows.item(i).type,rs.rows.item(i).key,rs.rows.item(i).abc)
-            console.debug("Getting Collection:" + rs.rows.item(i).tune)
+            //console.debug("Getting Collection:" + rs.rows.item(i).tune)
         }
-        if (rs.rows.length==0){
-            console.debug("No Items in database... returning faux item...")
-            collectionPage.addCollection('23302','http://thesession.org/tunes/13318','Harry Gidley\'s','waltz','Cmajor','G | cBc | EDC | cBc | D3 |BAG | BAG| BAG | E2G | cBc | EDC | cBc | D3 | BAG | BAG | FED | C3 ||G3 | E3 | A3 | F3 | F2F | D2A | A2G | E3 |G3 | E3 | F3 | A2A | BAG | FED | CEG | c2 ||')
-        }
+        //if (rs.rows.length==0){
+        //    console.debug("No Items in database... returning faux item...")
+        //    collectionPage.addCollection('23302','http://thesession.org/tunes/13318','Harry Gidley\'s','waltz','Cmajor','G | cBc | EDC | cBc | D3 |BAG | BAG| BAG | E2G | cBc | EDC | cBc | D3 | BAG | BAG | FED | C3 ||G3 | E3 | A3 | F3 | F2F | D2A | A2G | E3 |G3 | E3 | F3 | A2A | BAG | FED | CEG | c2 ||')
+        //}
     })
 }

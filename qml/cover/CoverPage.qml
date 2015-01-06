@@ -34,21 +34,23 @@ import Sailfish.Silica 1.0
 CoverBackground {
     Label {
         id: label
+        text: "SessionFinder"
         anchors.centerIn: parent
-        text: "My Cover"
+        width: parent.width
+        horizontalAlignment: Text.AlignHCenter
+        elide: Text.ElideLeft
+    }
+    Image {
+        source: "TheSessionFinder.svg"
+        anchors.bottom: label.top
+        anchors.bottomMargin: 15
+        anchors.horizontalCenter: parent.horizontalCenter
+        width: 86 // fixed icon size
+        height: 86
     }
 
-    CoverActionList {
-        id: coverAction
-
-        CoverAction {
-            iconSource: "image://theme/icon-cover-next"
-        }
-
-        CoverAction {
-            iconSource: "image://theme/icon-cover-pause"
-        }
-    }
 }
+//It would be nice to add a CoverActionList.
+
 
 

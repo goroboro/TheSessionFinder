@@ -23,10 +23,17 @@ Page {
             query: "abc/string()"
         }
     }
-    // To enable PullDownMenu, place our content in a SilicaFlickable
-    SilicaFlickable {
-        anchors.fill: parent
+    id: page
 
+    SilicaListView {
+        id: listView
+        model: tuneSettings
+        width: page.width
+        height: page.height
+        anchors.top: parent.top
+        header: PageHeader {
+            title: "Tune Settings"
+        }
         // PullDownMenu and PushUpMenu must be declared in SilicaFlickable, SilicaListView or SilicaGridView
         PullDownMenu {
             MenuItem {
@@ -40,14 +47,6 @@ Page {
                 text: "Search For Tune"
                 onClicked: pageStack.replace(Qt.resolvedUrl("Query.qml"))
             }
-        }
-    id: page
-    SilicaListView {
-        id: listView
-        model: tuneSettings
-        anchors.fill: parent
-        header: PageHeader {
-            title: "Tune Settings"
         }
         delegate: BackgroundItem {
             id: delegate
@@ -71,4 +70,4 @@ Page {
         }
     }
 }
-}
+
